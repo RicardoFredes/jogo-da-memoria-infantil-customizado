@@ -1,0 +1,207 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222;
+  color: white;
+}
+
+.container {
+  width: 100%;
+  max-width: 620px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.card {
+  width: 100%;
+  appearance: none;
+  border: none;
+
+  aspect-ratio: 4/3;
+  position: relative;
+  padding: 0;
+  background-color: transparent;
+  perspective: 1000px;
+  transition: transform 0.8s;
+}
+
+.card::before {
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  /* https://heropatterns.com/ */
+  background-color: #DFDBE5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card:not(.flipped):hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.card-img {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: block;
+  position: absolute;
+  inset: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+
+  transform: rotateY(180deg);
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped:before {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .card-img {
+  transform: rotateY(0);
+}
+
+.card.matched .card-img {
+  animation: match 0.8s ease-in-out forwards;
+}
+
+@keyframes match {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  80% {
+    transform: scale(1.2) rotate(20deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+}
+
+.nav {
+  height: 64px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.nav > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav * {
+  font-size: 1rem;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  display: none;
+
+  transition: opacity 0.8s;
+  padding: 0.5rem;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+  animation: showModal 0.8s;
+}
+
+.modal.close {
+  animation: closeModal 0.8s;
+}
+
+.modal-card {
+  background-color: #000;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.modal-content h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@keyframes showModal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

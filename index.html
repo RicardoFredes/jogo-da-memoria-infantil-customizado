@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Memória Infantil Customizado</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-container">
+      <p>Nível: <span id="level">1</span></p>
+      <h1>Jogo de Memória</h1>
+      <p>Acertos: <span id="score">0</span></p>
+    </div>
+  </nav>
+  <div class="container">
+    <main id="game" class="game"></main>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <div class="modal-content">
+        <h1>Parabéns</h1>
+        <p>Você completou o jogo!</p>
+        <button id="restart">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
